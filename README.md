@@ -157,3 +157,23 @@ Lista de mudanças feitas, pode ser a lista dos commits feitos, ou uma simples l
 ## Commits
 Idealmente, os commits devem fazer uso da convenção de [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) <br>
 Algo que eu recomendo é o uso da extensão de terminal [Commitizen](https://github.com/commitizen/cz-cli) ou a extensão do VSCode [Commit Message Editor](https://marketplace.visualstudio.com/items?itemName=adam-bender.commit-message-editor)
+
+## Immediate Post
+
+### Como fazer uma postagem imediata
+Para fazer uma postagem imediata, você pode usar o comando `ts-node` diretamente no terminal. Certifique-se de que o arquivo `ImmediatePost.ts` está configurado corretamente com seu usuário e senha do Threads. Em seguida, execute o seguinte comando:
+
+~~~bash
+ts-node src/ImmediatePost.ts
+~~~
+
+Isso iniciará o bot e permitirá que você insira a mensagem e a imagem (se desejar) diretamente no terminal.
+
+### How to make an immediate post
+To make an immediate post, you can use the `ts-node` command directly in the terminal. Ensure that the `ImmediatePost.ts` file is correctly configured with your Threads username and password. Then, run the following command:
+
+~~~bash
+ts-node src/ImmediatePost.ts
+~~~
+
+This will start the bot and allow you to enter the message and image (if desired) directly in the terminal.

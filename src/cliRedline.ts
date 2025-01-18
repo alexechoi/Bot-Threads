@@ -18,19 +18,22 @@ const CLI = async () => {
             messageData.img = img;
 
             rl.question('Qual dia da semana você deseja postar? (domingo, segunda, etc.) ', (dayOfWeek: string) => {
-                rl.question('Qual vai ser o horario da postagem?  em  formato de 24 horas tipo 14:00', (hour: string) => {
+                rl.question('Qual vai ser o horario da postagem? em formato de 24 horas tipo 14:00', (hour: string) => {
                     const cronTime = PostWithData(dayOfWeek, hour);
+                    console.log(`Scheduling post for ${dayOfWeek} at ${hour} with cron time: ${cronTime}`);
+
+                    // Schedule the post immediately
                     cron.schedule(cronTime, () => {
                         if (img.trim() !== '') {
-                            Message(messageData.text, messageData.img)
-                            console.log('Postado com sucesso!')
+                            Message(messageData.text, messageData.img);
                         } else {
-                            Message(messageData.text)
-                            console.log('Postado com sucesso!')
+                            Message(messageData.text);
                         }
-                    });
+                        console.log('Postado com sucesso!');
+                    })();
+
                     rl.close();
-                })
+                });
             });
         });
     });
