@@ -1,4 +1,8 @@
 import { Message } from "./AutoPost";
+import { generateTweet } from "./generateThreads";
+import * as dotenv from 'dotenv';
+
+dotenv.config();
 
 const immediatePost = async (text: string, image?: string) => {
     console.log("Starting immediate post...");
@@ -13,8 +17,14 @@ const immediatePost = async (text: string, image?: string) => {
     console.log("Immediate post completed successfully!");
 }
 
-// Example usage
-const messageText = "This is an immediate post!";
+// Load themes from environment variable
+const themes = process.env.THEMES?.split(',') || [];
+const randomTheme = themes[Math.floor(Math.random() * themes.length)];
 const imageUrl = ""; // Optional: provide an image URL if needed
 
-immediatePost(messageText, imageUrl);
+// Generate the tweet using OpenAI
+generateTweet(randomTheme).then(generatedText => {
+    immediatePost(generatedText, imageUrl);
+}).catch(error => {
+    console.error("Error generating tweet:", error);
+});

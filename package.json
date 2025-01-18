@@ -1,8 +1,9 @@
 {
   "dependencies": {
     "dotenv": "^16.3.1",
-    "node-cron": "^3.0.2",
+    "node-cron": "^3.0.3",
     "node-schedule": "^2.1.1",
+    "openai": "^4.79.1",
     "redline": "^1.0.1",
     "threads-api": "^1.4.0",
     "ts-node": "^10.9.2"
@@ -10,5 +11,8 @@
   "scripts": {
     "start": "tsc && node ./build/cliRedline.js",
     "dev": "ts-node src/cliRedline.ts"
+  },
+  "devDependencies": {
+    "@types/node-cron": "^3.0.11"
   }
 }

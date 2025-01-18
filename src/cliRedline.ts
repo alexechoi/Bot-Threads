@@ -1,8 +1,11 @@
 import * as readline from "readline";
 import { Message } from "./AutoPost";
 import { PostWithData } from './PostData'
-const cron = require('node-cron');
+import { generateTweet } from './generateThreads'
+import * as dotenv from 'dotenv';
+import * as cron from 'node-cron';
 
+dotenv.config();
 
 let messageData = { text: '', img: '' }
 
@@ -12,7 +15,14 @@ const CLI = async () => {
         output: process.stdout
     });
 
-    rl.question('O que deseja postar?', (text: string) => {
+    rl.question('O que deseja postar? (ou pressione Enter para gerar um post)', async (text: string) => {
+        if (!text) {
+            // Load themes from environment variable
+            const themes = process.env.THEMES?.split(',') || [];
+            const randomTheme = themes[Math.floor(Math.random() * themes.length)];
+            text = await generateTweet(randomTheme); // Generate tweet based on random theme
+        }
+
         rl.question('Deseja postar junto com uma imagem? (insira o link da img)', (img: string) => {
             messageData.text = text;
             messageData.img = img;
@@ -30,7 +40,7 @@ const CLI = async () => {
                             Message(messageData.text);
                         }
                         console.log('Postado com sucesso!');
-                    })();
+                    });
 
                     rl.close();
                 });
