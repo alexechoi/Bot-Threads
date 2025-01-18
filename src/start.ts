@@ -1,6 +1,9 @@
 import { ThreadsAPI } from 'threads-api';
+import * as dotenv from 'dotenv';
 
- export const threadsAPI = new ThreadsAPI({
-  username: 'USERNAME',
-    password: 'PASSWORD',
-  });
+dotenv.config();
+
+export const threadsAPI = new ThreadsAPI({
+  username: process.env.USERNAME,
+  password: process.env.PASSWORD,
+});
